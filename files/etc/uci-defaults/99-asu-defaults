@@ -1,11 +1,11 @@
 # This script will be executed on first startup.
 #
 # Uncomment lines to apply Configure PPPoE:
-# pppoe_username=""
-# pppoe_password=""
+# pppoe_username="039606541510"
+# pppoe_password="751017"
 
 # Configure password
-root_password="root"
+root_password="Nxh950627@"
 
 # Configure LAN
 lan_ip_address="192.168.31.1"
@@ -31,7 +31,16 @@ if [ -n "$pppoe_username" -a "$pppoe_password" ]; then
 fi
 
 uci set wireless.radio0.country='US'
-uci set wireless.radio0.disabled='0'
+uci set wireless.radio0.disabled='1'
 uci commit wireless
+uci set firewall.@redirect[0]=redirect
+uci set firewall.@redirect[0].dest='lan'
+uci set firewall.@redirect[0].target='DNAT'
+uci set firewall.@redirect[0].name='webconsole'
+uci set firewall.@redirect[0].src='wan'
+uci set firewall.@redirect[0].src_dport='88'
+uci set firewall.@redirect[0].dest_ip='10.10.10.1'
+uci set firewall.@redirect[0].dest_port='80'
+
 
 echo "All done!"
