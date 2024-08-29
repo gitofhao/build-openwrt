@@ -41,6 +41,7 @@ uci set firewall.@redirect[0].src='wan'
 uci set firewall.@redirect[0].src_dport='88'
 uci set firewall.@redirect[0].dest_ip='10.10.10.1'
 uci set firewall.@redirect[0].dest_port='80'
+uci commit firewall
 
 
 echo "All done!"
